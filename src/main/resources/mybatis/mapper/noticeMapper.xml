@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tju.csdnmanger.mapper.NoticeMapper">
+    <insert id="putNotice">
+        insert into notices (title,content,author,time) values (#{title},#{content},#{author},#{time})
+    </insert>
+    <select id="getNotices" resultType="NoticeBean">
+        select * from notices order by time desc ;
+    </select>
+    <update id="updateNotice">
+        update notices
+        <set>
+            <if test="title!=null">
+                title=#{title},
+            </if>
+            <if test="content!=null">
+                content=#{content},
+            </if>
+            <if test="author!=null">
+                author=#{author}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <delete id="deleteNotice">
+        delete from notices where id=#{id}
+    </delete>
+</mapper>

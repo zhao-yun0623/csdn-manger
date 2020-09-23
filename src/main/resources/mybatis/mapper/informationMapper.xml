@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tju.csdnmanger.mapper.InformationMapper">
+    <select id="getUsersInformation" resultType="InformationBean">
+        select * from informations
+        <where>
+            <if test="userId!=0">
+                user_id=#{userId}
+            </if>
+            <if test="phone!=null">
+                and phone=#{phone}
+            </if>
+            <if test="name!=null">
+                and name=#{name}
+            </if>
+            <if test="sex!=null">
+                and sex=#{sex}
+            </if>
+            <if test="faculty!=null">
+                and faculty=#{faculty}
+            </if>
+            <if test="major!=null">
+                and major=#{major}
+            </if>
+            <if test="clazz!=null">
+                and clazz=#{clazz}
+            </if>
+            <if test="stuNum!=null">
+                and stu_num=#{stuNum}
+            </if>
+            <if test="qq!=null">
+                and qq=#{qq}
+            </if>
+        </where>
+    </select>
+    <update id="updateInformation">
+        update informations
+        <set>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="stuNum!=null">
+                stu_num=#{stuNum},
+            </if>
+            <if test="sex!=null">
+                sex=#{sex},
+            </if>
+            <if test="faculty!=null">
+                faculty=#{faculty},
+            </if>
+            <if test="major!=null">
+                major=#{major},
+            </if>
+            <if test="clazz!=null">
+                clazz=#{clazz},
+            </if>
+            <if test="qq!=null">
+                qq=#{qq}
+            </if>
+        </set>
+        where user_id=#{userId}
+    </update>
+</mapper>

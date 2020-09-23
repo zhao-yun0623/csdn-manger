@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tju.csdnmanger.mapper.AdminMapper">
+    <select id="getUserByPhone" resultType="AdminBean">
+        select * from admins where phone=#{phone};
+    </select>
+    <insert id="insertUser">
+        insert into admins (password,phone) values (#{password},#{phone})
+    </insert>
+    <update id="changePassword">
+        update admins set password=#{password} where phone=#{phone}
+    </update>
+</mapper>

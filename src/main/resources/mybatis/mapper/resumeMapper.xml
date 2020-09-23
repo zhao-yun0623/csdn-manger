@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tju.csdnmanger.mapper.ResumeMapper">
+    <select id="getResume" resultType="ResumeBean">
+        select * from resumes r
+        join informations i
+        on r.user_id=i.user_id
+        where r.user_id=#{userId}
+    </select>
+    <select id="getResumes" resultType="ResumeBean">
+        select * from resumes r
+        join informations i
+        on r.user_id=i.user_id
+        <where>
+            <if test="state!=null">
+                state=#{state}
+            </if>
+            <if test="name!=null">
+                and name=#{name}
+            </if>
+            <if test="phone!=null">
+                and phone=#{phone}
+            </if>
+            <if test="faculty!=null">
+                and faculty=#{faculty}
+            </if>
+            <if test="major!=null">
+                and majot=#{faculty}
+            </if>
+            <if test="clazz!=null">
+                and clazz=#{clazz}
+            </if>
+            <if test="stuNum!=null">
+                and stu_num=#{stuNum}
+            </if>
+            <if test="userId!=0">
+                and r.user_id=#{userId}
+            </if>
+            <if test="id!=0">
+                and r.id=#{id}
+            </if>
+            <if test="sex!=null">
+                and sex=#{sex}
+            </if>
+            <if test="qq!=null">
+                and qq=#{qq}
+            </if>
+        </where>
+    </select>
+    <update id="check">
+        update resumes set state=#{state},check_time=#{checkTime} where user_id=#{userId}
+    </update>
+    <update id="interview">
+        update resumes set state=#{state},interview_time=#{interviewTime} where user_id=#{userId}
+    </update>
+    <update id="backInterview">
+        update resumes set state=1,interview_time=null where user_id=#{userId}
+    </update>
+</mapper>
